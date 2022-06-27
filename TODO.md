@@ -47,8 +47,25 @@
 
 
 ## TODO
+* Typescript types for react props
+    * https://jhackshaw.com/post/efficient-types-with-gatsby
+    * https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/
+* Master stylesheet
+    * Black background
+    * White font
+    * Font type and sizes
+    * Gray borders
 * Use GatsbyImage instead of external image links
+    * Styling for images - border/padding
 * Page layout component
+    * https://www.w3schools.com/html/html_responsive.asp
+    * Figure out how to let body go wider
+    * Header
+    * Top navbar - consider hamburger menu instead
+    * Right sidebar
+        * Featured posts
+        * Monthly archive
+        * Tag cloud
 * Try out GatsbyCloud
 * Try out large incremental build locally and in the cloud
 

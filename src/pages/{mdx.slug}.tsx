@@ -1,27 +1,19 @@
-// import * as React from 'react'
-// // import Layout from '../components/layout'
-// const BlogPost = () => {
-//   return (
-//     // <Layout pageTitle="Super Cool Blog Posts">
-//       <p>My blog post contents will go here (eventually).</p>
-//     // </Layout>
-//   )
-// }
-// export default BlogPost
+import * as React from 'react';
+import { graphql, PageProps } from 'gatsby';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import BlogPage from '../components/blogpage';
 
-import * as React from 'react'
-import { graphql } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-//import Layout from '../../components/layout'
-const BlogPost = ({ data }) => {
-  return (
-    <div>
-      <p>{data.mdx.frontmatter.date}</p>
-      <MDXRenderer>
-        {data.mdx.body}
-      </MDXRenderer>
-    </div>
-  )
+const BlogPost = ({ data }: PageProps<{mdx: Queries.Mdx}>) => {
+    return (
+        <div>
+            <BlogPage>
+                <p>{data.mdx.frontmatter!.date}</p>
+                <MDXRenderer>
+                    {data.mdx.body}
+                </MDXRenderer>
+            </BlogPage>
+        </div>
+    )
 }
 export const query = graphql`
   query ($id: String) {

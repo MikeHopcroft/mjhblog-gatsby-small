@@ -1,4 +1,4 @@
-import { graphql, Link, useStaticQuery } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 import * as React from "react";
 import { Helmet } from 'react-helmet';
 
@@ -19,16 +19,9 @@ const paragraphStyles = {
 }
 
 // markup
-const IndexPage = ({ data }) => {
-    // const data = useStaticQuery(graphql`
-    //     query {
-    //         site {
-    //             siteMetadata {
-    //                 title
-    //             }
-    //         }
-    //     }
-    // `);
+// https://jhackshaw.com/post/efficient-types-with-gatsby
+const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
+
     const data0 = { site: { siteMetadata: { title: 'foobar' } } };
 
     return (
@@ -48,7 +41,7 @@ const IndexPage = ({ data }) => {
                 {
                     data.allMdx.nodes.map(node => (
                         <li key={node.id}>
-                            <b><Link to={node.slug}>{node.frontmatter.title}</Link> : {node.frontmatter.date}</b>
+                            <b><Link to={node.slug!}>{node.frontmatter!.title}</Link> : {node.frontmatter!.date}</b>
                             <br/>
                             {node.slug}
                             <br/>
@@ -62,7 +55,7 @@ const IndexPage = ({ data }) => {
 }
 
 export const query = graphql`
-  {
+  query IndexPage {
     allMdx(sort: {fields: frontmatter___date, order: DESC}) {
         nodes {
             frontmatter {
