@@ -18,6 +18,7 @@
 * Google tag
 * Banner image
 * Posted on date
+* 404 page
 
 ## Tooling
 * Markdown support in VSCode. Should be able to continue lists with carriage return.
@@ -31,6 +32,8 @@
     * Remove date from post folder name - keep day
 
 ## Bugs
+* First image broken for mobile on Russia with Love
+* NavItems extend into header.
 * Block quote on atelier-picnic-at-carkeek-park should be italicized
 * Remove image thumbnails
 * Look at each page
@@ -59,13 +62,26 @@
     * Styling for images - border/padding
 * Page layout component
     * https://www.w3schools.com/html/html_responsive.asp
-    * Figure out how to let body go wider
+    * x Figure out how to let body go wider
+    * Text block has max width
     * Header
     * Top navbar - consider hamburger menu instead
     * Right sidebar
         * Featured posts
         * Monthly archive
         * Tag cloud
+    * Blog page doesn't have right slider
+    Alt text for banner
+* Styles
+    * General organizing principle
+    * H1
+    * A
+    * Main text
+    * Left and right margins
+    * Image borders
+        * Gray
+        * White
+        * Hover
 * Try out GatsbyCloud
 * Try out large incremental build locally and in the cloud
 

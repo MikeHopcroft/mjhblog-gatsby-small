@@ -1,0 +1,31 @@
+/* For blog images */
+span.gatsby-resp-image-wrapper {
+    border: 1px solid #ddd;
+    padding: 6px;
+}
+
+figcaption.gatsby-resp-image-figcaption {
+    text-align: center;
+}
+
+a {
+    color: #e4741f;
+}
+
+body {
+    font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #bbbbbb;
+    background-color: black;
+    line-height: 1.65;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 48px;
+    color: white;
+}
+
+p {
+    max-width: 800px;
+}
