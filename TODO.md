@@ -6,19 +6,24 @@
 * Formatting for images
     * Border
     * Caption
-* Image gallery with light table
+* . Image gallery with light table
 * Navbar organized by month
-* Tag cloud
+    * Month pages
+* Tags
+    * Tag cloud
+    * Tag pages
 * Featured posts
+* Featured image
 * How to deal with two posts on the same date?
 * Navbar
 * About page
 * Contact page
 * Gallery pages
 * Google tag
-* Banner image
+* . Banner image
 * Posted on date
 * 404 page
+* Pagination/infinite scrol?
 
 ## Tooling
 * Markdown support in VSCode. Should be able to continue lists with carriage return.
@@ -30,6 +35,8 @@
 ## Import
 * Script to copy over files from WordPress export
     * Remove date from post folder name - keep day
+    * Add day folder
+    * Images should be peers of blog post unless part of a justified image grid gallery
 
 ## Bugs
 * First image broken for mobile on Russia with Love
@@ -37,6 +44,8 @@
 * Block quote on atelier-picnic-at-carkeek-park should be italicized
 * Remove image thumbnails
 * Look at each page
+* Getting props.pageContext to mdx renderer
+    * https://github.com/gatsbyjs/gatsby/issues/23490
 
 ## Deployment
 * Investigate ways to incrementally deploy to Azure blob storage
@@ -58,8 +67,9 @@
     * White font
     * Font type and sizes
     * Gray borders
-* Use GatsbyImage instead of external image links
+* . Use GatsbyImage instead of external image links
     * Styling for images - border/padding
+        * May have to override img tag in MDXProvider.
 * Page layout component
     * https://www.w3schools.com/html/html_responsive.asp
     * x Figure out how to let body go wider
