@@ -7,6 +7,9 @@
     * Border
     * Caption
 * . Image gallery with light table
+    * https://www.gatsbyjs.com/plugins/gatsby-remark-images-grid/
+    * https://engineering.belchior.me/creating-a-custom-photo-gallery-using-gatsbyjs-and-css-grid-ck8ghm0vn01vkz3s1ulux9v17
+    * https://medium.com/seminal/making-an-awesome-image-gallery-using-a-css-grid-6f3da0937345
 * Navbar organized by month
     * Month pages
 * Tags
@@ -41,6 +44,7 @@
 ## Bugs
 * First image broken for mobile on Russia with Love
 * NavItems extend into header.
+* Navbar should fit on IPhone SE. Or use hamburger menu.
 * Block quote on atelier-picnic-at-carkeek-park should be italicized
 * Remove image thumbnails
 * Look at each page
@@ -71,6 +75,8 @@
     * Styling for images - border/padding
         * May have to override img tag in MDXProvider.
 * Page layout component
+    * OtherPosts and BlogPosts should be determined by frontmatter
+    * Reintroduce React Helment component
     * https://www.w3schools.com/html/html_responsive.asp
     * x Figure out how to let body go wider
     * Text block has max width
@@ -82,6 +88,16 @@
         * Tag cloud
     * Blog page doesn't have right slider
     Alt text for banner
+* Blog page list
+    * Hero images
+    * Responsive layout with CSS grid
+* Image gallery
+    * Subdirectory filtering
+    * Understand CSS grid layout
+    * Masonry grid
+        * Image size treatment
+        * Consider listing images in gallery tag or frontmatter
+    * Lightbox
 * Styles
     * General organizing principle
     * H1
@@ -95,4 +111,14 @@
 * Try out GatsbyCloud
 * Try out large incremental build locally and in the cloud
 
+# Next
+* Next/Previous links on blog posts
+* Add layouts to MDX renderer so that all pages can be MDX
+* Gallery
+    * Frontmatter image lists - order, size
+    * CSS grid
+    * React image lightbox
+* Pagination
+* Tag cloud
+* Featured posts
 

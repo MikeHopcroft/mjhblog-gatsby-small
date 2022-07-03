@@ -16,26 +16,18 @@ function getImages(data: Queries.BlogPostQuery) {
   return images as ArrayNonNull<typeof images>;
 }
 
-// const BlogPost = ({ data, pageContext }: PageProps<{mdx: Queries.Mdx}>) => {
 const BlogPost = ({ data, pageContext }: PageProps<Queries.BlogPostQuery>) => {
-  // console.log('$$$$$$: ' + JSON.stringify(pageContext));
-
-  //   const images = data.allFile.edges.map((edge) => edge.node.childImageSharp);
-  //   type x = ArrayNonNull<typeof images>;
-
   const images = getImages(data);
 
   const shortcodes = { Gallery };
   return (
     <div>
-      xxx JSON.stringify(pageContext) yyy
       <BlogPage>
-        {/* <pre>{JSON.stringify(images, null, 2)}</pre> */}
-        <p>end</p>
+        <h1>{data.mdx?.frontmatter?.title}</h1>
         <MDXProvider components={shortcodes}>
           <MDXRenderer
             pageContext={{...pageContext, images}}
-            relativeDirectory={data.mdx!.parent!.relativeDirectory}
+            relativeDirectory={data.mdx?.parent?.relativeDirectory}
           >
             {data.mdx!.body}
           </MDXRenderer>

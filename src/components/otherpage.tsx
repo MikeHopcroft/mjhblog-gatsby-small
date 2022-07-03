@@ -1,24 +1,22 @@
 import React from "react";
 
 import Header from "./header";
-import Sidebar from "./sidebar";
 
-import { container, content } from "./blogpage.module.css";
+import { container, content } from "./otherpage.module.css";
 
 interface Props {
   children: React.ReactNode;
 }
 
-function BlogPage(props: Props) {
+function OtherPage(props: Props) {
   return (
     <div>
       <Header />
       <div className={container}>
         <div className={content}>{props.children}</div>
-        <Sidebar />
       </div>
     </div>
   );
 }
 
-export default BlogPage;
+export default OtherPage;

@@ -1,35 +1,10 @@
-.header {
-    background-color: lightblue;
-    width: 100%;
-}
-
-.banner {
-    background-color: lightseagreen;
-    height: 100px;
-}
-
-.navbar {
-    background-color: rgb(29,29,29);
-}
-
-.navitem {
-    color: white;
-    padding: 20px;
-    display: inline-block;
-}
-
-.navitem:hover {
-    color: black;
-    background-color: white;
-}
-
-.sidebar {
-    background-color: lightgoldenrodyellow;
-}
-
 .container {
     display: grid;
+    grid-column-gap: 40px;
     grid-template-columns: 1fr 200px;
+}
+
+.content {
 }
 
 @media only screen and (max-width: 800px) {

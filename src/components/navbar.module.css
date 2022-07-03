@@ -1,0 +1,14 @@
+.navbar {
+    background-color: rgb(29,29,29);
+}
+
+.navitem {
+    color: white;
+    padding: 20px;
+    display: inline-block;
+}
+
+.navitem:hover {
+    color: black;
+    background-color: white;
+}
