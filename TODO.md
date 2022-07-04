@@ -112,12 +112,15 @@
 * Try out large incremental build locally and in the cloud
 
 # Next
-* Next/Previous links on blog posts
 * Add layouts to MDX renderer so that all pages can be MDX
-* Gallery
-    * Frontmatter image lists - order, size
-    * CSS grid
+* Gallery2
+    * x Frontmatter image lists - order, size
+    * x CSS grid
     * React image lightbox
+    * Cleanup old GraphQL for old gallery
+    * Cleanup relative path and regex
+* Next/Previous links on blog posts
+    * Wait on deprecating original Gallery that queries all images
 * Pagination
 * Tag cloud
 * Featured posts

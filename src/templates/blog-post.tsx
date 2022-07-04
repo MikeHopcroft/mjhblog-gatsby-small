@@ -5,6 +5,7 @@ import * as React from "react";
 
 import BlogPage from "../components/blogpage";
 import Gallery from "../components/gallery";
+import Gallery2 from "../components/gallery2";
 
 type ArrayNonNull<ArrayType extends readonly unknown[]> =
   ArrayType extends readonly (infer ElementType)[]
@@ -18,15 +19,16 @@ function getImages(data: Queries.BlogPostQuery) {
 
 const BlogPost = ({ data, pageContext }: PageProps<Queries.BlogPostQuery>) => {
   const images = getImages(data);
+  const galleries = data.mdx?.frontmatter?.galleries;
 
-  const shortcodes = { Gallery };
+  const shortcodes = { Gallery, Gallery2 };
   return (
     <div>
       <BlogPage>
         <h1>{data.mdx?.frontmatter?.title}</h1>
         <MDXProvider components={shortcodes}>
           <MDXRenderer
-            pageContext={{...pageContext, images}}
+            pageContext={{...pageContext, galleries, images}}
             relativeDirectory={data.mdx?.parent?.relativeDirectory}
           >
             {data.mdx!.body}
@@ -43,6 +45,21 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")
+        galleries {
+          contents {
+            scale
+            image {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+                original {
+                  height
+                  width
+                  src
+                }
+              }
+            }
+          }
+        }
       }
       parent {
         ... on File {
@@ -69,4 +86,5 @@ export const query = graphql`
     }
   }
 `;
+
 export default BlogPost;

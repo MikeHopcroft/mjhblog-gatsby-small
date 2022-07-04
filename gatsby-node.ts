@@ -2,6 +2,21 @@ import type { GatsbyNode, PageProps } from "gatsby";
 import _ from "lodash";
 import { resolve } from "path";
 
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions }) => {
+    const { createTypes } = actions;
+    const typeDefs = `
+    type MdxFrontmatterGalleries implements Node {
+      contents: [MdxFrontmatterGalleriesContents!]!
+    }
+    type MdxFrontmatterGalleriesContents {
+      scale: Float
+    }
+  `;
+    createTypes(typeDefs);
+  };
+
+
 export const createPages: GatsbyNode["createPages"] = async ({
   actions,
   graphql,
@@ -69,7 +84,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       context: {
         id: edge.node.id,
         relativeDirectory: edge.node.parent!.relativeDirectory,
-        regex: '/' + escapeRegex(edge.node.parent!.relativeDirectory) + '/',
+        regex: "/" + escapeRegex(edge.node.parent!.relativeDirectory) + "/",
       },
     });
   });
@@ -80,6 +95,5 @@ export const createPages: GatsbyNode["createPages"] = async ({
 };
 
 function escapeRegex(s: string) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
 }
-
