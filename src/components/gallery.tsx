@@ -1,38 +1,123 @@
-import { graphql, useStaticQuery } from "gatsby";
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
+import Lightbox from 'react-image-lightbox';
+
+import { container, imageWrapper, wrapper } from "./gallery.module.css";
+
+type GalleryDescriptor = NonNullable<
+  NonNullable<
+    NonNullable<
+      NonNullable<Queries.BlogPostQuery["mdx"]>["frontmatter"]
+    >["galleries"]
+  >[number]
+>;
+
+type ImageDescriptor = GalleryDescriptor["contents"][number];
 
 interface Props {
-  path: string;
-  images: { gatsbyImageData: IGatsbyImageData }[];
+  gallery: GalleryDescriptor;
 }
 
-const Gallery = (props: Props) => {
-  //     console.log('========================================');
-  //     console.log(JSON.stringify(data,null,2));
-  //     console.log('========================================');
+interface State {
+  photoIndex: number;
+  isOpen: boolean;
+}
 
-  return (
-    <div
-      style={{
-        // height: "200px",
-        backgroundColor: "lightblue",
-        color: "black",
-      }}
-    >
-      xxx
-      {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      Gallery (path={props.path})
+class Gallery3 extends React.Component<Props, State> {
+  images: string[];
+
+  readonly sizes = [
+    [1, 1],
+    [1, 2],
+    [2, 1],
+    [2, 3],
+    [3, 2],
+    [3, 4],
+    [4, 3],
+    [4, 5],
+    [5, 4],
+  ];
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      isOpen: false,
+      photoIndex: 0,
+    };
+
+    this.images = props.gallery.contents.map(
+      (x) => x.image?.childImageSharp?.original!.src!
+    );
+
+    this.getImage = this.getImage.bind(this);
+  }
+
+  onClick(photoIndex: number) {
+    this.setState({ isOpen: true, photoIndex });
+  }
+
+  render() {
+    const { isOpen, photoIndex } = this.state;
+    const images = this.images;
+
+    return (
       <div>
-        {props.images.map((image) => (
-          // <pre>{image.gatsbyImageData.width}</pre>
-          <div style={{ width: 100 }}>
-            <GatsbyImage alt="foobar" image={image.gatsbyImageData} />
+        {/* <div>
+          {this.images.map((x) => (<div>{x}</div>))}
+        </div> */}
+        <div className={wrapper}>
+          <div className={container}>
+            {this.props.gallery.contents.map((x, i) => this.getImage(x, i))}
           </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+        </div>
 
-export default Gallery;
+        {isOpen && (
+          <Lightbox
+            mainSrc={images[photoIndex]}
+            nextSrc={images[(photoIndex + 1) % images.length]}
+            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+            onMovePrevRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + images.length - 1) % images.length,
+              })
+            }
+            onMoveNextRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + 1) % images.length,
+              })
+            }
+          />
+        )}
+      </div>
+    );
+  }
+
+  getImage(image: ImageDescriptor, index: number) {
+    const original = image.image?.childImageSharp?.original!;
+    const aspectRatio = original.width! / original.height!;
+
+    const layout = this.sizes
+      .map((s) => ({ size: s, delta: Math.abs(s[0] / s[1] - aspectRatio) }))
+      .reduce((p, c) => (p.delta < c.delta ? p : c));
+
+    const gridColumn = `span ${layout.size[0]}`;
+    const gridRow = `span ${layout.size[1]}`;
+
+    return (
+      <div
+        style={{ flexGrow: 1, gridColumn, gridRow }}
+        onClick={() => this.onClick(index)}
+      >
+        <GatsbyImage
+          className={imageWrapper}
+          alt="foobar"
+          image={image.image?.childImageSharp!.gatsbyImageData!}
+        />
+      </div>
+    );
+  }
+}
+
+export default Gallery3;

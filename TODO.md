@@ -114,14 +114,16 @@
 # Next
 * Add layouts to MDX renderer so that all pages can be MDX
 * Gallery2
-    * x Frontmatter image lists - order, size
-    * x CSS grid
-    * React image lightbox
-      * https://stackoverflow.com/questions/54834930/how-to-include-local-javascript-on-a-gatsby-page
-      * https://www.gatsbyjs.com/docs/using-client-side-only-packages/
-    * Cleanup old GraphQL for old gallery
-    * Cleanup relative path and regex
-    * Captions and titles
+  * scale
+  * x Frontmatter image lists - order, size
+  * x CSS grid
+  * x React image lightbox
+    * x https://stackoverflow.com/questions/54834930/how-to-include-local-javascript-on-a-gatsby-page
+    * x https://www.gatsbyjs.com/docs/using-client-side-only-packages/
+  * Cleanup old GraphQL for old gallery
+  * Cleanup gallery2, gallery3
+  * Cleanup relative path and regex
+  * Captions and titles
 * Next/Previous links on blog posts
     * Wait on deprecating original Gallery that queries all images
 * Pagination
