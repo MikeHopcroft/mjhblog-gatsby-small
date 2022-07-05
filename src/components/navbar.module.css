@@ -1,14 +1,20 @@
 .navbar {
-    background-color: rgb(29,29,29);
+  background-color: #1d1d1d; /*rgb(29,29,29);*/
+  background-image: -webkit-linear-gradient(
+    top,
+    rgb(56, 56, 56),
+    rgb(39, 39, 39)
+  );
+  /* height: 43px; */
 }
 
 .navitem {
-    color: white;
-    padding: 20px;
-    display: inline-block;
+  color: white;
+  padding: 15px;
+  display: inline-block;
 }
 
 .navitem:hover {
-    color: black;
-    background-color: white;
+  color: black;
+  background-color: white;
 }

@@ -65,7 +65,6 @@ const TagCloud = () => {
   return (
     <div
       style={{
-        height: "200px",
         backgroundColor: "black",
         color: "black",
       }}

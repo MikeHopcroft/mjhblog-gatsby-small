@@ -112,6 +112,8 @@
 * Try out large incremental build locally and in the cloud
 
 # Next
+* Page centering
+* Remove all style={{}}
 * Add layouts to MDX renderer so that all pages can be MDX
 * Gallery2
   * scale
@@ -135,6 +137,9 @@
   * Widget title styling to more general CSS file
   * Widget title styling to match original
 * Featured posts
+  * x Links to posts
+  * x Tooltip
+  * BUG: image widths on bottom of page in mobile
 * Archive
   * Grouping by month: https://github.com/gatsbyjs/gatsby/issues/27163
 
