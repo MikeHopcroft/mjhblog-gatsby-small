@@ -54,7 +54,7 @@ function getImage(image: ImageDescriptor) {
   const gridRow = `span ${layout.size[1]}`;
 
   return (
-    <div style={{ flexGrow: 1, gridColumn, gridRow }}>
+    <div style={{ flexGrow: 1, gridColumn, gridRow }} onClick={() => alert(image.image?.childImageSharp?.original?.src)}>
       <GatsbyImage
         className={imageWrapper}
         alt="foobar"

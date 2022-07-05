@@ -29,9 +29,9 @@
 * Pagination/infinite scrol?
 
 ## Tooling
-* Markdown support in VSCode. Should be able to continue lists with carriage return.
-* Indent with 2 spaces
-* Prettier
+* x Markdown support in VSCode. Should be able to continue lists with carriage return.
+* x Indent with 2 spaces
+* x Prettier
 * Linter
 * GTS
 
@@ -117,8 +117,11 @@
     * x Frontmatter image lists - order, size
     * x CSS grid
     * React image lightbox
+      * https://stackoverflow.com/questions/54834930/how-to-include-local-javascript-on-a-gatsby-page
+      * https://www.gatsbyjs.com/docs/using-client-side-only-packages/
     * Cleanup old GraphQL for old gallery
     * Cleanup relative path and regex
+    * Captions and titles
 * Next/Previous links on blog posts
     * Wait on deprecating original Gallery that queries all images
 * Pagination

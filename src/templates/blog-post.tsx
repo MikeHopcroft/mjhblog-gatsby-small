@@ -6,6 +6,7 @@ import * as React from "react";
 import BlogPage from "../components/blogpage";
 import Gallery from "../components/gallery";
 import Gallery2 from "../components/gallery2";
+import Gallery3 from "../components/gallery3";
 
 type ArrayNonNull<ArrayType extends readonly unknown[]> =
   ArrayType extends readonly (infer ElementType)[]
@@ -21,7 +22,7 @@ const BlogPost = ({ data, pageContext }: PageProps<Queries.BlogPostQuery>) => {
   const images = getImages(data);
   const galleries = data.mdx?.frontmatter?.galleries;
 
-  const shortcodes = { Gallery, Gallery2 };
+  const shortcodes = { Gallery, Gallery2, Gallery3 };
   return (
     <div>
       <BlogPage>
