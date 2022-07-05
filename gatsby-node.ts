@@ -31,14 +31,6 @@ export const createPages: GatsbyNode["createPages"] = async ({
           node {
             id
             slug
-            frontmatter {
-              tags
-            }
-            parent {
-              ... on File {
-                relativeDirectory
-              }
-            }
           }
         }
       }
@@ -83,8 +75,6 @@ export const createPages: GatsbyNode["createPages"] = async ({
       component: blogPostTemplate,
       context: {
         id: edge.node.id,
-        relativeDirectory: edge.node.parent!.relativeDirectory,
-        regex: "/" + escapeRegex(edge.node.parent!.relativeDirectory) + "/",
       },
     });
   });

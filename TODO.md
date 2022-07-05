@@ -120,10 +120,11 @@
   * x React image lightbox
     * x https://stackoverflow.com/questions/54834930/how-to-include-local-javascript-on-a-gatsby-page
     * x https://www.gatsbyjs.com/docs/using-client-side-only-packages/
-  * Cleanup old GraphQL for old gallery
-  * Cleanup gallery2, gallery3
-  * Cleanup relative path and regex
+  * x Cleanup old GraphQL for old gallery
+  * x Cleanup gallery2, gallery3
+  * x Cleanup relative path and regex
   * Captions and titles
+  * foobar alt text
 * Next/Previous links on blog posts
     * Wait on deprecating original Gallery that queries all images
 * Pagination
