@@ -1,0 +1,13 @@
+.tag {
+  margin-right: 10px;
+}
+
+/* TODO: move this to a more general stylesheet */
+.widget-title {
+	color: #ccc;
+	font-size: 10px;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+}

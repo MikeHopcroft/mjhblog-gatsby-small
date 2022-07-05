@@ -115,6 +115,8 @@
 * Add layouts to MDX renderer so that all pages can be MDX
 * Gallery2
   * scale
+  * Captions and titles
+  * foobar alt text
   * x Frontmatter image lists - order, size
   * x CSS grid
   * x React image lightbox
@@ -123,11 +125,16 @@
   * x Cleanup old GraphQL for old gallery
   * x Cleanup gallery2, gallery3
   * x Cleanup relative path and regex
-  * Captions and titles
-  * foobar alt text
+* Image Grid
+  * 2-wide as in http://www.michaeljhopcroft.com/2015/10/29/norma-bassett-hall/
 * Next/Previous links on blog posts
     * Wait on deprecating original Gallery that queries all images
 * Pagination
-* Tag cloud
+* . Tag cloud
+  * Link hover styling
+  * Widget title styling to more general CSS file
+  * Widget title styling to match original
 * Featured posts
+* Archive
+  * Grouping by month: https://github.com/gatsbyjs/gatsby/issues/27163
 
