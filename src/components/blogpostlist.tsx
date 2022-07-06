@@ -1,17 +1,19 @@
-import { Link, PageProps } from "gatsby";
+import { Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import * as React from "react";
+
+import { BlogPostInfo } from "./blogpostfragment";
 
 import { container, post } from "./blogpostlist.module.css";
 
 interface Props {
-  posts: PageProps<Queries.BlogHomePageQuery>;
+  posts: readonly BlogPostInfo[];
 }
 
 const BlogPostList = (props: Props) => {
   return (
     <div className={container}>
-      {props.posts.data.allMdx.nodes.map((node) => [
+      {props.posts.map((node) => [
         <div>
           <GatsbyImage
             alt="foobar"

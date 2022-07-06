@@ -1,7 +1,29 @@
-import React from "react"
+import { graphql, PageProps } from "gatsby";
+import React from "react";
 
-export default function TagTemplate({ pageContext: { tag } }) {
+import BlogPostList from "../components/blogpostlist";
+import BlogPage from "../components/blogpage";
+
+function TagTemplate({ data, pageContext }: PageProps<Queries.TagPageQuery>) {
   return (
-      <h1>Tag: {tag}</h1>
-  )
+    <BlogPage>
+      <h1>Tag: {(pageContext as any).tag}</h1>
+      <BlogPostList posts={data.allMdx.nodes} />
+    </BlogPage>
+  );
 }
+
+export const query = graphql`
+  query TagPage($tag: String) {
+    allMdx(
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
+      nodes {
+        ...BlogPostInfoFragment
+      }
+    }
+  }
+`;
+
+export default TagTemplate;
