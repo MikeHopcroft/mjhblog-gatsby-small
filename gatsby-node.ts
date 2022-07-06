@@ -58,6 +58,11 @@ export const createPages: GatsbyNode["createPages"] = async ({
           fieldValue
         }
       }
+      archiveGroup: allMdx {
+        group(field: fields___year_month) {
+          fieldValue
+        }
+      }
     }
   `);
 
@@ -82,6 +87,17 @@ export const createPages: GatsbyNode["createPages"] = async ({
       component: tagTemplate,
       context: {
         tag: tag!.fieldValue!,
+      },
+    });
+  });
+
+  const archiveTemplate = resolve(`./src/templates/archive-template.tsx`);
+  data.archiveGroup.group.forEach((archive) => {
+    createPage({
+      path: '/' + archive.fieldValue!,
+      component: archiveTemplate,
+      context: {
+        archive: archive!.fieldValue!,
       },
     });
   });
