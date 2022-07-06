@@ -1,5 +1,4 @@
 .wrapper {
-  width: 80%;
   margin: 0 auto;
   display: flex;
   padding: 10px;
@@ -9,30 +8,29 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
-  grid-auto-rows: 40px;
-  grid-gap: 10px;
-  /* grid-auto-flow: dense; */
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  grid-auto-rows: 50px;
 }
 
 .item {
-  /* width: 40px;
-  height: 40px; */
+  border: solid black 5px;
   flex-grow: 1;
   grid-column: span 1;
   grid-row: span 1;
 }
 
+.item:hover {
+  border: solid #292929 5px;
+}
+
 .image-wrapper {
   width: 100%;
   height: 100%;
-  border: solid black 5px;
 }
 
 .image-wrapper:hover {
   width: 100%;
   height: 100%;
-  border: solid #292929 5px;
 }
 
 /* TODO: move this to a more general stylesheet */
@@ -44,4 +42,3 @@
 	line-height: 2.6em;
 	text-transform: uppercase;
 }
-

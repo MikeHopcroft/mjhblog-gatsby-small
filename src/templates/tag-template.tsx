@@ -7,7 +7,7 @@ import BlogPage from "../components/blogpage";
 function TagTemplate({ data, pageContext }: PageProps<Queries.TagPageQuery>) {
   return (
     <BlogPage>
-      <h1>Tag: {(pageContext as any).tag}</h1>
+      <div className="widget-title">Tag: {(pageContext as any).tag}</div>
       <BlogPostList posts={data.allMdx.nodes} />
     </BlogPage>
   );

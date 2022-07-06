@@ -24,12 +24,7 @@ const Featured = () => {
   `) as Queries.FeaturedQuery;
 
   return (
-    <div
-      style={{
-        backgroundColor: "#303030",
-        color: "black",
-      }}
-    >
+    <div>
       <div className={widgetTitle}>Featured Posts</div>
       <div className={wrapper}>
         <div className={container}>

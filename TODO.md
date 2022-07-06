@@ -112,11 +112,14 @@
 * Try out large incremental build locally and in the cloud
 
 # Next
-* Tag summary page
-* Archive summary page
+* x Tag summary page
+* x Archive summary page
+* BUG: sidebar gets clipped as window becomes narrower
+  * http://localhost:8000/2012/9/2012-09-09-school-supplies/
+  * Seems to be when there is an image on the page
 * Blog post publish date below title
 * Page centering
-* Remove all style={{}}
+* Remove all inline style={{}}
 * Add layouts to MDX renderer so that all pages can be MDX
 * Gallery2
   * scale
@@ -136,7 +139,7 @@
     * Wait on deprecating original Gallery that queries all images
 * Pagination
 * . Tag cloud
-  * Link hover styling
+  * x Link hover styling
   * Widget title styling to more general CSS file
   * Widget title styling to match original
 * Featured posts

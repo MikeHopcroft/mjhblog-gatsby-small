@@ -34,6 +34,7 @@ const Archive = () => {
 };
 
 function createDate(info: ArchiveInfo) {
+  // TODO: removed duplicate code in archive-template.tsx
   const x = new Date(info.fieldValue!);
   const month = x.toLocaleString('default', { timeZone: 'utc', month: 'long' });
   const anchorText = `${month} ${x.getFullYear()}`;
