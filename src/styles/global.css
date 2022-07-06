@@ -9,7 +9,12 @@ figcaption.gatsby-resp-image-figcaption {
 }
 
 a {
-    color: #e4741f;
+  color: #e4741f;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 body {

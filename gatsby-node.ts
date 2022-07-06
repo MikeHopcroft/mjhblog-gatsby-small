@@ -16,6 +16,25 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
     createTypes(typeDefs);
   };
 
+// Add fields to support blog post archive, grouped by year-month.
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, actions }) => {
+  const { createNodeField } = actions;
+
+  console.log(node.internal.type);
+  if (node.internal.type === "Mdx") {
+    const date = new Date((node.frontmatter as any).date);
+
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1;
+    const year_month = `${year}-${String(month).padStart(2, '0')}`;
+    const day = date.getUTCDate() + 1;
+
+    createNodeField({ node, name: "year", value: year });
+    createNodeField({ node, name: "month", value: month });
+    createNodeField({ node, name: "year-month", value: year_month });
+    createNodeField({ node, name: "day", value: day });
+  }
+};
 
 export const createPages: GatsbyNode["createPages"] = async ({
   actions,

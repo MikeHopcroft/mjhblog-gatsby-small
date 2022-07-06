@@ -112,6 +112,9 @@
 * Try out large incremental build locally and in the cloud
 
 # Next
+* Tag summary page
+* Archive summary page
+* Blog post publish date below title
 * Page centering
 * Remove all style={{}}
 * Add layouts to MDX renderer so that all pages can be MDX
@@ -141,5 +144,5 @@
   * x Tooltip
   * BUG: image widths on bottom of page in mobile
 * Archive
-  * Grouping by month: https://github.com/gatsbyjs/gatsby/issues/27163
+  * x Grouping by month: https://github.com/gatsbyjs/gatsby/issues/27163
 
