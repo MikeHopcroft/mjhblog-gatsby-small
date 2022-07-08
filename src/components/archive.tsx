@@ -20,11 +20,7 @@ const Archive = () => {
   const items = [...data.allMdx.group].sort((a,b)=>-a.fieldValue!.localeCompare(b.fieldValue!))
 
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-      }}
-    >
+    <div>
       <div className={widgetTitle}>Archive</div>
       {
         items.map(createDate)

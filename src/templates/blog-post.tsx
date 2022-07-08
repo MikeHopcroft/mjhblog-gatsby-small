@@ -8,19 +8,18 @@ import Gallery from "../components/gallery";
 
 const BlogPost = ({ data, pageContext }: PageProps<Queries.BlogPostQuery>) => {
   const galleries = data.mdx?.frontmatter?.galleries;
-
   const shortcodes = { Gallery };
+
   return (
-    <div>
-      <BlogPage>
-        <h1>{data.mdx?.frontmatter?.title}</h1>
-        <MDXProvider components={shortcodes}>
-          <MDXRenderer pageContext={{ ...pageContext, galleries }}>
-            {data.mdx!.body}
-          </MDXRenderer>
-        </MDXProvider>
-      </BlogPage>
-    </div>
+    <BlogPage>
+      <h1>{data.mdx?.frontmatter?.title}</h1>
+      <div className='widget-title'>Posted on {data.mdx?.frontmatter?.date}</div>
+      <MDXProvider components={shortcodes}>
+        <MDXRenderer pageContext={{ ...pageContext, galleries }}>
+          {data.mdx!.body}
+        </MDXRenderer>
+      </MDXProvider>
+    </BlogPage>
   );
 };
 

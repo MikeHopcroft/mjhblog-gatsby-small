@@ -20,3 +20,12 @@
     }
 }
 
+.hero {
+  border: solid black 5px;
+}
+
+.hero:hover {
+  border: solid #292929 5px;
+}
+
+

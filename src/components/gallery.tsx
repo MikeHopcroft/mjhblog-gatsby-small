@@ -63,9 +63,6 @@ class Gallery3 extends React.Component<Props, State> {
 
     return (
       <div>
-        {/* <div>
-          {this.images.map((x) => (<div>{x}</div>))}
-        </div> */}
         <div className={wrapper}>
           <div className={container}>
             {this.props.gallery.contents.map((x, i) => this.getImage(x, i))}
@@ -107,6 +104,7 @@ class Gallery3 extends React.Component<Props, State> {
 
     return (
       <div
+        // Following inline style necessary for computed grid properties.
         style={{ flexGrow: 1, gridColumn, gridRow }}
         onClick={() => this.onClick(index)}
       >

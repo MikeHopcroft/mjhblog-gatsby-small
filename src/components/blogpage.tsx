@@ -3,6 +3,8 @@ import React from "react";
 import Header from "./header";
 import Sidebar from "./sidebar";
 
+import 'normalize.css';
+
 import { container, content } from "./blogpage.module.css";
 
 interface Props {

@@ -40,6 +40,9 @@
     * Remove date from post folder name - keep day
     * Add day folder
     * Images should be peers of blog post unless part of a justified image grid gallery
+    * Detect and remove smaller versions of images
+    * Detect and remove unreferenced images
+  * Consider putting page content in separate repo from Gatsby site
 
 ## Bugs
 * First image broken for mobile on Russia with Love
@@ -52,6 +55,8 @@
     * https://github.com/gatsbyjs/gatsby/issues/23490
 
 ## Deployment
+* https://docs.microsoft.com/en-us/azure/cloud-services-extended-support/swap-cloud-service 
+* https://www.gatsbyjs.com/docs/conceptual/image-plugin-architecture/
 * Investigate ways to incrementally deploy to Azure blob storage
     * azcopy - what happens to timestamps on clone? Might be a problem for CI/CD
     * Use git to keep track of which files should be deployed - only those that have changed since a certain SHA
@@ -59,11 +64,19 @@
 * Investigate private Azure repo - for increase size limits
 * Investigate serving directly from git repo on bluehost
 * Investigate CDN
+* Stable image file naming
+  * Google: gatsby stable image names
+    * https://github.com/gatsbyjs/gatsby/issues/11479
+    * https://github.com/gatsbyjs/gatsby/issues/6232
+  * Google: gatsby stable image names git repo
+  * https://www.gatsbyjs.com/plugins/gatsby-source-git/
+  * https://stackoverflow.com/questions/57113747/using-a-git-repo-to-keep-other-gatsby-sites-in-sync
+  * https://github.com/gatsbyjs/gatsby/issues/13699
 
 
 
 ## TODO
-* Typescript types for react props
+* x Typescript types for react props
     * https://jhackshaw.com/post/efficient-types-with-gatsby
     * https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/
 * Master stylesheet
@@ -76,7 +89,7 @@
         * May have to override img tag in MDXProvider.
 * Page layout component
     * OtherPosts and BlogPosts should be determined by frontmatter
-    * Reintroduce React Helment component
+    * Reintroduce React Helmet component
     * https://www.w3schools.com/html/html_responsive.asp
     * x Figure out how to let body go wider
     * Text block has max width
@@ -89,15 +102,15 @@
     * Blog page doesn't have right slider
     Alt text for banner
 * Blog page list
-    * Hero images
+    * x Hero images
     * Responsive layout with CSS grid
 * Image gallery
-    * Subdirectory filtering
-    * Understand CSS grid layout
-    * Masonry grid
+    * x Subdirectory filtering
+    * x Understand CSS grid layout
+    * x Masonry grid
         * Image size treatment
         * Consider listing images in gallery tag or frontmatter
-    * Lightbox
+    * x Lightbox
 * Styles
     * General organizing principle
     * H1
@@ -112,14 +125,31 @@
 * Try out large incremental build locally and in the cloud
 
 # Next
-* x Tag summary page
-* x Archive summary page
+* Try yarn for legacy peer dependency problem
+* Investigate
+  * react-slick
+  * tailwind css
+* Separate pages from blog posts
+  * Based on page or post folder?
+* Next/Previous links on blog posts
+    * x Wait on deprecating original Gallery that queries all images
+    * Wait on separating posts from pages. Next/prev only for posts.
+* React Helmet
+* Pagination
+* x Don't render missing hero images
+* x Click on hero image should navigate to blog post
+* x Hero image should have hover styling
+* x Blog post publish date below title
+* 404 page
+* Favicon
+* Blog post title margins and em sizing
+* Page centering
 * BUG: sidebar gets clipped as window becomes narrower
   * http://localhost:8000/2012/9/2012-09-09-school-supplies/
   * Seems to be when there is an image on the page
-* Blog post publish date below title
-* Page centering
-* Remove all inline style={{}}
+  * Issue is that image sources haven't been updated to local images.
+* Image captions
+* Remove extra <div> elements
 * Add layouts to MDX renderer so that all pages can be MDX
 * Gallery2
   * scale
@@ -135,9 +165,6 @@
   * x Cleanup relative path and regex
 * Image Grid
   * 2-wide as in http://www.michaeljhopcroft.com/2015/10/29/norma-bassett-hall/
-* Next/Previous links on blog posts
-    * Wait on deprecating original Gallery that queries all images
-* Pagination
 * . Tag cloud
   * x Link hover styling
   * Widget title styling to more general CSS file
@@ -145,7 +172,18 @@
 * Featured posts
   * x Links to posts
   * x Tooltip
-  * BUG: image widths on bottom of page in mobile
+  * x BUG: image widths on bottom of page in mobile
 * Archive
   * x Grouping by month: https://github.com/gatsbyjs/gatsby/issues/27163
+* x Tag summary page
+* x Archive summary page
+* x Remove all inline style={{}}
+* x Header image full bleed
+  * https://stackoverflow.com/questions/12582624/what-is-a-user-agent-stylesheet
+  * https://meyerweb.com/eric/tools/css/reset/
+  * https://necolas.github.io/normalize.css/
+
+
+http://localhost:8000/static/4da918fc5bfedb9633d49bb4fc41ad2c/e5166/IMG_0170.jpg
+<img class="gatsby-resp-image-image" alt="alt text" title="Par Avion" src="/static/4da918fc5bfedb9633d49bb4fc41ad2c/e5166/IMG_0170.jpg" srcset="/static/4da918fc5bfedb9633d49bb4fc41ad2c/f93b5/IMG_0170.jpg 300w,/static/4da918fc5bfedb9633d49bb4fc41ad2c/b4294/IMG_0170.jpg 600w,/static/4da918fc5bfedb9633d49bb4fc41ad2c/e5166/IMG_0170.jpg 1200w,/static/4da918fc5bfedb9633d49bb4fc41ad2c/d9c39/IMG_0170.jpg 1800w,/static/4da918fc5bfedb9633d49bb4fc41ad2c/df51d/IMG_0170.jpg 2400w,/static/4da918fc5bfedb9633d49bb4fc41ad2c/93719/IMG_0170.jpg 4000w" sizes="(max-width: 1200px) 100vw, 1200px" loading="lazy" decoding="async" style="width: 100%; height: 100%; margin: 0px; vertical-align: middle; position: absolute; top: 0px; left: 0px; opacity: 1; transition: opacity 0.5s ease 0s; color: inherit; box-shadow: white 0px 0px 0px 400px inset;">
 

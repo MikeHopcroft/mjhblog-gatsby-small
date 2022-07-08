@@ -63,20 +63,16 @@ const TagCloud = () => {
   const tags = fontSizeAndTruncate(data.tagsGroup.group);
 
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-        color: "black",
-      }}
-    >
+    <div>
       <div className={widgetTitle}>
         Tags
       </div>
       {tags.map((x) => (
         <Link
           className={tag}
+          // Following inline style necessary for computed font size.
           style={{ display: "inline-block", fontSize: x.fontSize }}
-          /* TODO: use function for URL mapping here and in gatsby-node.ts */
+          // TODO: use function for URL mapping here and in gatsby-node.ts.
           to={`/tags/${_.kebabCase(x.fieldValue!)}/`}
           title={`${x.totalCount} topics`}
         >

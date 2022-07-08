@@ -2,6 +2,7 @@ import React from "react";
 
 import Header from "./header";
 
+import 'normalize.css';
 import { container, content } from "./otherpage.module.css";
 
 interface Props {
