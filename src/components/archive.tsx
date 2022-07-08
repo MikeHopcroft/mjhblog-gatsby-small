@@ -3,12 +3,12 @@ import React from "react";
 
 import { widgetTitle } from "./archive.module.css";
 
-type ArchiveInfo = Queries.ArchiveQuery['allMdx']['group'][number];
+type ArchiveInfo = Queries.ArchiveQuery["allMdx"]["group"][number];
 
 const Archive = () => {
   const data = useStaticQuery(graphql`
     query Archive {
-      allMdx {
+      allMdx(filter: { frontmatter: { type: { eq: null } } }) {
         group(field: fields___year_month) {
           fieldValue
           totalCount
@@ -17,14 +17,14 @@ const Archive = () => {
     }
   `) as Queries.ArchiveQuery;
 
-  const items = [...data.allMdx.group].sort((a,b)=>-a.fieldValue!.localeCompare(b.fieldValue!))
+  const items = [...data.allMdx.group].sort(
+    (a, b) => -a.fieldValue!.localeCompare(b.fieldValue!)
+  );
 
   return (
     <div>
       <div className={widgetTitle}>Archive</div>
-      {
-        items.map(createDate)
-      }
+      {items.map(createDate)}
     </div>
   );
 };
@@ -32,12 +32,18 @@ const Archive = () => {
 function createDate(info: ArchiveInfo) {
   // TODO: removed duplicate code in archive-template.tsx
   const x = new Date(info.fieldValue!);
-  const month = x.toLocaleString('default', { timeZone: 'utc', month: 'long' });
+  const month = x.toLocaleString("default", { timeZone: "utc", month: "long" });
   const anchorText = `${month} ${x.getFullYear()}`;
-  const slug = '/' + info.fieldValue;
-  const title = `${info.totalCount} topic${info.totalCount>1?'s':''}`;
+  const slug = "/" + info.fieldValue;
+  const title = `${info.totalCount} topic${info.totalCount > 1 ? "s" : ""}`;
 
-  return (<div><Link to={slug} title={title}>{anchorText}</Link></div>)
+  return (
+    <div>
+      <Link to={slug} title={title}>
+        {anchorText}
+      </Link>
+    </div>
+  );
 }
 
 export default Archive;

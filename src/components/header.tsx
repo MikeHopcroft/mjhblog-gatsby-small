@@ -8,7 +8,7 @@ import { header } from "./header.module.css";
 function Header() {
   return (
     <div className={header}>
-      <StaticImage alt="banner" src="../images/IMG_5231-Header.jpg" />
+      <StaticImage alt="banner" src="../../content/images/IMG_5231-Header.jpg" />
       <Navbar />
     </div>
   );

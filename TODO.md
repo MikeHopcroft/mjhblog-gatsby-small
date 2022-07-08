@@ -129,8 +129,8 @@
 * Investigate
   * react-slick
   * tailwind css
-* Separate pages from blog posts
-  * Based on page or post folder?
+* x Separate pages from blog posts
+  * x Based on page or post folder?
 * Next/Previous links on blog posts
     * x Wait on deprecating original Gallery that queries all images
     * Wait on separating posts from pages. Next/prev only for posts.

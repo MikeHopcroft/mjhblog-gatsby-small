@@ -15,16 +15,16 @@ import { tag, widgetTitle } from "./tagcloud.module.css";
 type TagInfo = Queries.TagCloudQuery["tagsGroup"]["group"][number];
 
 const fontSizes = [
-  '6pt',
-  '7pt',
-  '8pt',
-  '9pt',
-  '10pt',
-  '11pt',
-  '12pt',
-  '13pt',
-  '14pt',
-]
+  "6pt",
+  "7pt",
+  "8pt",
+  "9pt",
+  "10pt",
+  "11pt",
+  "12pt",
+  "13pt",
+  "14pt",
+];
 
 function fontSizeAndTruncate(tags: readonly TagInfo[]) {
   const sorted = [...tags].sort((a, b) =>
@@ -38,20 +38,23 @@ function fontSizeAndTruncate(tags: readonly TagInfo[]) {
       ? 1
       : 0
   );
-  const truncated = sorted.slice(0,10) as (TagInfo & {fontSize?: string})[];
-  const max = truncated.reduce((p, c) => c.totalCount > p.totalCount ? c : p).totalCount;
+  const truncated = sorted.slice(0, 10) as (TagInfo & { fontSize?: string })[];
+  const max = truncated.reduce((p, c) =>
+    c.totalCount > p.totalCount ? c : p
+  ).totalCount;
   for (const tag of truncated) {
-    const fontSize = fontSizes[Math.floor(tag.totalCount / max * (fontSizes.length - 1))];
+    const fontSize =
+      fontSizes[Math.floor((tag.totalCount / max) * (fontSizes.length - 1))];
     tag.fontSize = fontSize;
   }
-  truncated.sort((a,b) => a.fieldValue!.localeCompare(b.fieldValue!));
+  truncated.sort((a, b) => a.fieldValue!.localeCompare(b.fieldValue!));
   return truncated;
 }
 
 const TagCloud = () => {
   const data = useStaticQuery(graphql`
     query TagCloud {
-      tagsGroup: allMdx {
+      tagsGroup: allMdx(filter: { frontmatter: { type: { eq: null } } }) {
         group(field: frontmatter___tags) {
           fieldValue
           totalCount
@@ -64,9 +67,7 @@ const TagCloud = () => {
 
   return (
     <div>
-      <div className={widgetTitle}>
-        Tags
-      </div>
+      <div className={widgetTitle}>Tags</div>
       {tags.map((x) => (
         <Link
           className={tag}

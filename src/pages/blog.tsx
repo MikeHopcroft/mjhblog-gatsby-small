@@ -19,7 +19,10 @@ export const query = graphql`
         title
       }
     }
-    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+    allMdx(
+      filter: { frontmatter: { type: { eq: null } } }
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
       nodes {
         ...BlogPostInfoFragment
       }

@@ -16,7 +16,7 @@ function TagTemplate({ data, pageContext }: PageProps<Queries.TagPageQuery>) {
 export const query = graphql`
   query TagPage($tag: String) {
     allMdx(
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { tags: { in: [$tag] }, type: { eq: null } } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       nodes {
