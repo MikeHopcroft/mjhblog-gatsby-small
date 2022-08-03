@@ -1,5 +1,7 @@
-import {GatsbyImage, IGatsbyImageData} from 'gatsby-plugin-image';
+import {GatsbyImage} from 'gatsby-plugin-image';
 import React from 'react';
+
+import {ImageDescriptor} from '../interfaces';
 
 import {
   caption,
@@ -7,15 +9,6 @@ import {
   imageBorder,
   imageWrapper,
 } from './image.module.css';
-
-// TODO: remove duplication
-interface ImageDescriptor {
-  name: string;
-  title: string | null;
-  caption: string | null;
-  gatsbyImageData: IGatsbyImageData;
-  src: string;
-}
 
 interface Props {
   props: {
@@ -39,8 +32,7 @@ class Image extends React.Component<Props> {
           <div className={imageBorder}>
             <GatsbyImage
               className={imageWrapper}
-              // style={{width: '100%'}}
-              alt="foobar"
+              alt={getAltText(image)}
               title={image.title ? image.title : ''}
               image={image.gatsbyImageData}
             />
@@ -56,6 +48,10 @@ function renderCaption(text: string | null) {
   if (caption) {
     return <div className={caption}>{text}</div>;
   }
+}
+
+function getAltText(image: ImageDescriptor) {
+  return image.altText ? image.altText : image.caption ? image.caption : '';
 }
 
 export default Image;

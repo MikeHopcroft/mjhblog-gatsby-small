@@ -3,6 +3,8 @@ import {IGatsbyImageData} from 'gatsby-plugin-image';
 import _ from 'lodash';
 import {resolve} from 'path';
 
+import { ImageDescriptor } from './src/interfaces';
+
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
   ({actions, schema}) => {
     const {createTypes} = actions;
@@ -114,6 +116,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       }
       allImagesYaml(filter: {}) {
         nodes {
+          alt
           caption
           title
           image {
@@ -137,14 +140,6 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   const {data}: PageProps<Queries.TagsQuery> = result as any;
 
-  interface ImageDescriptor {
-    name: string;
-    title: string | null;
-    caption: string | null;
-    gatsbyImageData: IGatsbyImageData;
-    src: string;
-  }
-
   const images: {[key: string]: ImageDescriptor} = {};
   for (const x of data.allImagesYaml.nodes) {
     const name = x.image!.fluid!.originalName!;
@@ -154,6 +149,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       name,
       title: x.title,
       caption: x.caption,
+      altText: x.alt,
       gatsbyImageData: x.image!.gatsbyImageData,
       src: x.image!.original!.src,
     };

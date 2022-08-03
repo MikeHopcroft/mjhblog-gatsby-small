@@ -1,7 +1,9 @@
 - image: IMG_0095.jpg
-  caption: This is the caption
   title: this is the title
+  caption: This is the caption
+  alt: this is the alt text
 - image: IMG_0105.jpg
+  caption: caption for 105
 - image: IMG_0126-e1348804521343.jpg
 - image: IMG_0127.jpg
 - image: IMG_0128-e1348804786626.jpg
