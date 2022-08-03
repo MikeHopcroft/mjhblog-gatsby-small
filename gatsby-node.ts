@@ -120,6 +120,9 @@ export const createPages: GatsbyNode['createPages'] = async ({
             fluid {
               originalName
             }
+            original {
+              src
+            }
             gatsbyImageData
           }
         }
@@ -136,22 +139,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   interface ImageDescriptor {
     name: string;
-    title: string;
-    caption: string;
-    image: IGatsbyImageData;
+    title: string | null;
+    caption: string | null;
+    gatsbyImageData: IGatsbyImageData;
+    src: string;
   }
-  // const images = new Map<string, ImageDescriptor>();
-  // for (const x of data.allImagesYaml.nodes) {
-  //   const name = x.image!.fluid!.originalName!;
-  //   // TODO: error check for missing image, title, caption, etc.
-  //   // TODO: error check for duplicate image names.
-  //   images.set(name!, {
-  //     name,
-  //     title: x.title ? x.title : 'TITLE',
-  //     caption: x.caption ? x.caption : 'CAPTION',
-  //     image: x.image!.gatsbyImageData,
-  //   });
-  // }
+
   const images: {[key: string]: ImageDescriptor} = {};
   for (const x of data.allImagesYaml.nodes) {
     const name = x.image!.fluid!.originalName!;
@@ -159,9 +152,10 @@ export const createPages: GatsbyNode['createPages'] = async ({
     // TODO: error check for duplicate image names.
     images[name] = {
       name,
-      title: x.title ? x.title : 'TITLE',
-      caption: x.caption ? x.caption : 'CAPTION',
-      image: x.image!.gatsbyImageData,
+      title: x.title,
+      caption: x.caption,
+      gatsbyImageData: x.image!.gatsbyImageData,
+      src: x.image!.original!.src,
     };
   }
 

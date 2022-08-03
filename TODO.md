@@ -1,18 +1,21 @@
 ## Next
 * Image
-  * Hyperlink to full image
-  * Border with hover styling
-  * Caption area
+  * x Rename image to gatsbyImageData
+  * x Hyperlink to full image
+  * x Border with hover styling
+  * x Caption area
+  * Duplicated ImageDescriptor
   * Red X for error (with diagnostic message)
     * Error component
   * Check for duplicate image entries
   * Check for ImageSharps with same fluid.originalName
   * Check for dangling image entries
   * Log errors to special error page
-  * Rename image to gatsbyImageData
-  * Optional title, caption, alt text
+  * Alttext field - default value is caption
+  * . Optional title, caption, alt text
   * Override title, caption, alt text
 * Gallery
+  * Show titles on hover
   * Modify to take props and id instead of props.pageContext.galleries[id]
   * Index by id instead of position - or get rid of ids
   * Use image names instead of paths
