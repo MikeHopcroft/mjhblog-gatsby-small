@@ -1,18 +1,18 @@
-import { GatsbyImage } from "gatsby-plugin-image";
-import React from "react";
+import {GatsbyImage} from 'gatsby-plugin-image';
+import React from 'react';
 import Lightbox from 'react-image-lightbox';
 
-import { container, imageWrapper, wrapper } from "./gallery.module.css";
+import {container, imageWrapper, wrapper} from './gallery.module.css';
 
 type GalleryDescriptor = NonNullable<
   NonNullable<
     NonNullable<
-      NonNullable<Queries.BlogPostQuery["mdx"]>["frontmatter"]
-    >["galleries"]
+      NonNullable<Queries.BlogPostQuery['mdx']>['frontmatter']
+    >['galleries']
   >[number]
 >;
 
-type ImageDescriptor = GalleryDescriptor["contents"][number];
+type ImageDescriptor = GalleryDescriptor['contents'][number];
 
 interface Props {
   gallery: GalleryDescriptor;
@@ -47,18 +47,18 @@ class Gallery3 extends React.Component<Props, State> {
     };
 
     this.images = props.gallery.contents.map(
-      (x) => x.image?.childImageSharp?.original!.src!
+      x => x.image?.childImageSharp?.original!.src!
     );
 
     this.getImage = this.getImage.bind(this);
   }
 
   onClick(photoIndex: number) {
-    this.setState({ isOpen: true, photoIndex });
+    this.setState({isOpen: true, photoIndex});
   }
 
   render() {
-    const { isOpen, photoIndex } = this.state;
+    const {isOpen, photoIndex} = this.state;
     const images = this.images;
 
     return (
@@ -74,7 +74,7 @@ class Gallery3 extends React.Component<Props, State> {
             mainSrc={images[photoIndex]}
             nextSrc={images[(photoIndex + 1) % images.length]}
             prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-            onCloseRequest={() => this.setState({ isOpen: false })}
+            onCloseRequest={() => this.setState({isOpen: false})}
             onMovePrevRequest={() =>
               this.setState({
                 photoIndex: (photoIndex + images.length - 1) % images.length,
@@ -96,7 +96,7 @@ class Gallery3 extends React.Component<Props, State> {
     const aspectRatio = original.width! / original.height!;
 
     const layout = this.sizes
-      .map((s) => ({ size: s, delta: Math.abs(s[0] / s[1] - aspectRatio) }))
+      .map(s => ({size: s, delta: Math.abs(s[0] / s[1] - aspectRatio)}))
       .reduce((p, c) => (p.delta < c.delta ? p : c));
 
     const gridColumn = `span ${layout.size[0]}`;
@@ -105,7 +105,7 @@ class Gallery3 extends React.Component<Props, State> {
     return (
       <div
         // Following inline style necessary for computed grid properties.
-        style={{ flexGrow: 1, gridColumn, gridRow }}
+        style={{flexGrow: 1, gridColumn, gridRow}}
         onClick={() => this.onClick(index)}
       >
         <GatsbyImage

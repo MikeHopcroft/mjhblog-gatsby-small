@@ -1,3 +1,25 @@
+## Next
+* Image
+  * Hyperlink to full image
+  * Border with hover styling
+  * Caption area
+  * Red X for error (with diagnostic message)
+    * Error component
+  * Check for duplicate image entries
+  * Check for ImageSharps with same fluid.originalName
+  * Check for dangling image entries
+  * Log errors to special error page
+  * Rename image to gatsbyImageData
+  * Optional title, caption, alt text
+  * Override title, caption, alt text
+* Gallery
+  * Modify to take props and id instead of props.pageContext.galleries[id]
+  * Index by id instead of position - or get rid of ids
+  * Use image names instead of paths
+  * Types: justified, grid
+* Investigate passing pageContext automatically to components
+* Investigate invisible character in "Lunch time brought a lively discussion of this sonnet" - might be an MDX colorizing error
+
 ## Features
 * Next/prev links
 * Search
@@ -89,7 +111,7 @@
         * May have to override img tag in MDXProvider.
 * Page layout component
     * OtherPosts and BlogPosts should be determined by frontmatter
-    * Reintroduce React Helmet component
+    * Reintroduce React Helmet component - or Gatsby Head
     * https://www.w3schools.com/html/html_responsive.asp
     * x Figure out how to let body go wider
     * Text block has max width
