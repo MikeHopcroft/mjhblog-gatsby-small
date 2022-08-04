@@ -1,4 +1,5 @@
 ## Next
+* Complete image.yaml files
 * Image
   * x Rename image to gatsbyImageData
   * x Hyperlink to full image

@@ -105,7 +105,7 @@ class Gallery3 extends React.Component<Props, State> {
     return (
       <div
         // Following inline style necessary for computed grid properties.
-        style={{flexGrow: 1, gridColumn, gridRow}}
+        style={{position: 'relative', flexGrow: 1, gridColumn, gridRow}}
         onClick={() => this.onClick(index)}
       >
         <GatsbyImage
@@ -113,6 +113,35 @@ class Gallery3 extends React.Component<Props, State> {
           alt="foobar"
           image={image.image?.childImageSharp!.gatsbyImageData!}
         />
+        <div
+          style={{
+            position: 'absolute',
+            left: '0px',
+            top: '0px',
+            backgroundColor: 'red',
+            opacity: '20%',
+            width: '100%',
+            height: '100%',
+            border: 'solid black 5px',
+          }}
+        >
+          Title
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '0px',
+            left: '0px',
+            backgroundColor: 'black',
+            opacity: '0.6',
+            width: '100%',
+            border: 'solid green 5px',
+            color: 'white',
+            fontWeight: 'bold',
+          }}
+        >
+          Text
+        </div>
       </div>
     );
   }
