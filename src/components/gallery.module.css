@@ -46,15 +46,7 @@
 }
 
 .grid-cell:hover .titleOverlay {
-  /* display: block;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  background-color: red; */
   opacity: 20%;
-  /* width: 100%;
-  height: 100%;
-  border: solid black 5px; */
 }
 
 .titleText {

@@ -4,13 +4,13 @@ import {MDXRenderer} from 'gatsby-plugin-mdx';
 import * as React from 'react';
 
 import BlogPage from '../components/blogpage';
-import Gallery from '../components/gallery';
+import Gallery2 from '../components/gallery2';
 import Image from '../components/image';
 import OtherPage from '../components/otherpage';
 
 const BlogPost = ({data, pageContext}: PageProps<Queries.BlogPostQuery>) => {
   const galleries = data.mdx?.frontmatter?.galleries;
-  const shortcodes = {Gallery, Image};
+  const shortcodes = {Gallery2, Image};
 
   if (data.mdx?.frontmatter?.type !== null) {
     return (
@@ -47,19 +47,7 @@ export const query = graphql`
         title
         date(formatString: "MMMM D, YYYY")
         galleries {
-          contents {
-            scale
-            image {
-              childImageSharp {
-                gatsbyImageData(layout: CONSTRAINED)
-                original {
-                  height
-                  width
-                  src
-                }
-              }
-            }
-          }
+          image
         }
       }
       body
