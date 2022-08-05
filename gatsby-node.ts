@@ -1,21 +1,12 @@
 import type {GatsbyNode, PageProps} from 'gatsby';
-import {IGatsbyImageData} from 'gatsby-plugin-image';
 import _ from 'lodash';
 import {resolve} from 'path';
 
-import { ImageDescriptor } from './src/interfaces';
+import {ImageDescriptor} from './src/interfaces';
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
   ({actions, schema}) => {
     const {createTypes} = actions;
-    // const typeDefs = `
-    //   type MdxFrontmatterGalleries implements Node {
-    //     contents: [MdxFrontmatterGalleriesContents!]!
-    //   },
-    //   type MdxFrontmatterGalleriesContents {
-    //     scale: Float
-    //   }
-    // `;
     const typeDefs = [
       `type MdxFrontmatterGalleries implements Node {
         contents: [MdxFrontmatterGalleriesContents!]!
@@ -32,18 +23,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
           image: {
             type: 'ImageSharp',
             resolve: (source, args, context, info) => {
-              // If you were linking by ID, you could use `getNodeById` to
-              // find the correct author:
-              //
-              // return context.nodeModel.getNodeById({
-              //   id: source.author,
-              //   type: "AuthorJson",
-              // })
-              //
-              // But since the example is using the author email as foreign key,
-              // you can use `nodeModel.findOne` to find the linked author node.
-              // Note: Instead of getting all nodes and then using Array.prototype.find()
-              // Use nodeModel.findOne instead where possible!
               return context.nodeModel.findOne({
                 type: 'ImageSharp',
                 query: {
@@ -151,7 +130,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       caption: x.caption,
       altText: x.alt,
       gatsbyImageData: x.image!.gatsbyImageData,
-      src: x.image!.original!.src,
+      src: x.image!.original!.src!,
     };
   }
 

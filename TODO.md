@@ -1,5 +1,6 @@
 ## Next
 * Complete image.yaml files
+* Cleanup createSchemaCustomization() in gatsby-node.ts
 * Image
   * x Rename image to gatsbyImageData
   * x Hyperlink to full image
@@ -19,10 +20,14 @@
   * Consider image landing pages with captions.
   * BUG: scroll position not restored correctly after navigating to image and back.
 * Gallery
-  * Show titles on hover
-  * Modify to take props and id instead of props.pageContext.galleries[id]
-  * Index by id instead of position - or get rid of ids
-  * Use image names instead of paths
+  * Determine which image size is actually loaded
+  * Lightbox thumbnails while full-size images are loading
+  * . Try out long titles in galleries
+  * x Add title and caption to lightbox
+  * x Show titles on hover
+  * x Modify to take props and id instead of props.pageContext.galleries[id]
+  * x Index by id instead of position - or get rid of ids
+  * x Use image names instead of paths
   * Types: justified, grid
 * Investigate passing pageContext automatically to components
 * Investigate invisible character in "Lunch time brought a lively discussion of this sonnet" - might be an MDX colorizing error

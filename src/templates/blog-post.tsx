@@ -1,16 +1,16 @@
-import {MDXProvider} from '@mdx-js/react';
 import {graphql, PageProps} from 'gatsby';
 import {MDXRenderer} from 'gatsby-plugin-mdx';
+import {MDXProvider} from '@mdx-js/react';
 import * as React from 'react';
 
 import BlogPage from '../components/blogpage';
-import Gallery2 from '../components/gallery2';
+import Gallery from '../components/gallery';
 import Image from '../components/image';
 import OtherPage from '../components/otherpage';
 
 const BlogPost = ({data, pageContext}: PageProps<Queries.BlogPostQuery>) => {
   const galleries = data.mdx?.frontmatter?.galleries;
-  const shortcodes = {Gallery2, Image};
+  const shortcodes = {Gallery, Image};
 
   if (data.mdx?.frontmatter?.type !== null) {
     return (

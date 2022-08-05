@@ -33,6 +33,7 @@
     "gatsby-transformer-sharp": "^4.17.0",
     "gatsby-transformer-yaml": "^4.20.0",
     "install": "^0.13.0",
+    "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "npm": "^8.15.1",
     "react": "^18.1.0",

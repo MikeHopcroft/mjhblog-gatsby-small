@@ -2,6 +2,8 @@ import {GatsbyImage} from 'gatsby-plugin-image';
 import React from 'react';
 import Lightbox from 'react-image-lightbox';
 
+import {ImageDescriptor} from '../interfaces';
+
 import {
   container,
   gridCell,
@@ -11,18 +13,16 @@ import {
   wrapper,
 } from './gallery.module.css';
 
-type GalleryDescriptor = NonNullable<
-  NonNullable<
-    NonNullable<
-      NonNullable<Queries.BlogPostQuery['mdx']>['frontmatter']
-    >['galleries']
-  >[number]
->;
-
-type ImageDescriptor = GalleryDescriptor['contents'][number];
+type GalleryDescriptor = {image: string}[];
 
 interface Props {
-  gallery: GalleryDescriptor;
+  props: {
+    pageContext: {
+      images: {[key: string]: ImageDescriptor};
+      galleries: GalleryDescriptor[];
+    };
+  };
+  id: number;
 }
 
 interface State {
@@ -30,8 +30,8 @@ interface State {
   isOpen: boolean;
 }
 
-class Gallery3 extends React.Component<Props, State> {
-  images: string[];
+class Gallery extends React.Component<Props, State> {
+  images2: ImageDescriptor[];
 
   readonly sizes = [
     [1, 1],
@@ -53,9 +53,9 @@ class Gallery3 extends React.Component<Props, State> {
       photoIndex: 0,
     };
 
-    this.images = props.gallery.contents.map(
-      x => x.image?.childImageSharp?.original!.src!
-    );
+    const allImages = props.props.pageContext.images;
+    const gallery = props.props.pageContext.galleries[props.id]!;
+    this.images2 = gallery.map(x => allImages[x.image]);
 
     this.getImage = this.getImage.bind(this);
   }
@@ -66,21 +66,25 @@ class Gallery3 extends React.Component<Props, State> {
 
   render() {
     const {isOpen, photoIndex} = this.state;
-    const images = this.images;
+    const images = this.images2;
 
     return (
       <div>
         <div className={wrapper}>
           <div className={container}>
-            {this.props.gallery.contents.map((x, i) => this.getImage(x, i))}
+            {this.images2.map((x, i) => this.getImage(x, i))}
           </div>
         </div>
 
         {isOpen && (
           <Lightbox
-            mainSrc={images[photoIndex]}
-            nextSrc={images[(photoIndex + 1) % images.length]}
-            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+            imageTitle={images[photoIndex].title}
+            imageCaption={images[photoIndex].caption}
+            mainSrc={images[photoIndex].src}
+            nextSrc={images[(photoIndex + 1) % images.length].src}
+            prevSrc={
+              images[(photoIndex + images.length - 1) % images.length].src
+            }
             onCloseRequest={() => this.setState({isOpen: false})}
             onMovePrevRequest={() =>
               this.setState({
@@ -99,8 +103,9 @@ class Gallery3 extends React.Component<Props, State> {
   }
 
   getImage(image: ImageDescriptor, index: number) {
-    const original = image.image?.childImageSharp?.original!;
-    const aspectRatio = original.width! / original.height!;
+    const w = image.gatsbyImageData.width;
+    const h = image.gatsbyImageData.height;
+    const aspectRatio = w / h;
 
     const layout = this.sizes
       .map(s => ({size: s, delta: Math.abs(s[0] / s[1] - aspectRatio)}))
@@ -114,8 +119,6 @@ class Gallery3 extends React.Component<Props, State> {
         className={gridCell}
         // Following inline style necessary for computed grid properties.
         style={{
-          // position: 'relative',
-          // flexGrow: 1,
           gridColumn,
           gridRow,
         }}
@@ -124,13 +127,19 @@ class Gallery3 extends React.Component<Props, State> {
         <GatsbyImage
           className={imageWrapper}
           alt="foobar"
-          image={image.image?.childImageSharp!.gatsbyImageData!}
+          image={image.gatsbyImageData}
         />
         <div className={titleOverlay}></div>
-        <div className={titleText}>Text</div>
+        {renderTitle(image)}
       </div>
     );
   }
 }
 
-export default Gallery3;
+function renderTitle(image: ImageDescriptor) {
+  if (image.title) {
+    return <div className={titleText}>{image.title}</div>;
+  }
+}
+
+export default Gallery;
