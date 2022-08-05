@@ -2,7 +2,14 @@ import {GatsbyImage} from 'gatsby-plugin-image';
 import React from 'react';
 import Lightbox from 'react-image-lightbox';
 
-import {container, imageWrapper, wrapper} from './gallery.module.css';
+import {
+  container,
+  gridCell,
+  imageWrapper,
+  titleOverlay,
+  titleText,
+  wrapper,
+} from './gallery.module.css';
 
 type GalleryDescriptor = NonNullable<
   NonNullable<
@@ -104,8 +111,14 @@ class Gallery3 extends React.Component<Props, State> {
 
     return (
       <div
+        className={gridCell}
         // Following inline style necessary for computed grid properties.
-        style={{position: 'relative', flexGrow: 1, gridColumn, gridRow}}
+        style={{
+          // position: 'relative',
+          // flexGrow: 1,
+          gridColumn,
+          gridRow,
+        }}
         onClick={() => this.onClick(index)}
       >
         <GatsbyImage
@@ -113,35 +126,8 @@ class Gallery3 extends React.Component<Props, State> {
           alt="foobar"
           image={image.image?.childImageSharp!.gatsbyImageData!}
         />
-        <div
-          style={{
-            position: 'absolute',
-            left: '0px',
-            top: '0px',
-            backgroundColor: 'red',
-            opacity: '20%',
-            width: '100%',
-            height: '100%',
-            border: 'solid black 5px',
-          }}
-        >
-          Title
-        </div>
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '0px',
-            left: '0px',
-            backgroundColor: 'black',
-            opacity: '0.6',
-            width: '100%',
-            border: 'solid green 5px',
-            color: 'white',
-            fontWeight: 'bold',
-          }}
-        >
-          Text
-        </div>
+        <div className={titleOverlay}></div>
+        <div className={titleText}>Text</div>
       </div>
     );
   }
