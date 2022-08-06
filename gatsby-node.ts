@@ -4,6 +4,11 @@ import * as path from 'path';
 
 import {ImageDescriptor} from './src/interfaces';
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// createSchemaCustomization()
+//
+///////////////////////////////////////////////////////////////////////////////
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
   ({actions, schema}) => {
     const {createTypes} = actions;
@@ -17,49 +22,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
           image: {
             type: 'ImageSharp',
             resolve: (source, args, context, info) => {
-              // console.log('>>>>: ' + JSON.stringify(context.path, null, 2));
-              // console.log('>>>>: ' + JSON.stringify(source, null, 2));
-              // console.log(`>>>>: "${pathPrefix}"`);
-              // const parent = context.nodeModel.getNode()
-              // filter: {fields: {relativePath: {eq: "icon.png"}}}
-              // return context.nodeModel.findOne({
-              //   type: 'ImageSharp',
-              //   query: {
-              //     filter: {
-              //       gatsbyImageData: {},
-              //       fluid: {originalName: {eq: source.image}},
-              //       // parent: {relativePath: {eq: source.image}},
-              //     },
-              //   },
-              // });
               const parent = context.nodeModel.getNodeById({
                 id: source.parent,
               });
-              // const relativeDirectory = parent.relativeDirectory;
               const image = path.posix
                 .resolve('/', parent.relativeDirectory, source.image)
                 .slice(1);
               console.log(`>>>>: "${image}"`);
-
-              // console.log(`>>>>: "${source.image}"`);
-              // console.log(`====: "${source.parent}"`);
-              // try {
-              //   const parent = context.nodeModel.getNodeById({
-              //     id: source.parent,
-              //   });
-              //   console.log('++++: ' + JSON.stringify(parent, null, 2));
-              // } catch (e) {
-              //   console.log('Error: ' + e);
-              //   console.log(typeof context.nodeModel.getNode);
-              //   console.log(context.nodeModel.getNode);
-              // }
               return context.nodeModel.findOne({
                 type: 'ImageSharp',
                 query: {
                   filter: {
-                    // gatsbyImageData: {},
                     fields: {relativePath: {eq: image}},
-                    // parent: {relativePath: {eq: source.image}},
                   },
                 },
               });
@@ -71,6 +45,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     createTypes(typeDefs);
   };
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// onCreateNode()
+//
+///////////////////////////////////////////////////////////////////////////////
 // Add fields to support blog post archive, grouped by year-month.
 export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   node,
@@ -79,12 +58,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
 }) => {
   const {createNodeField} = actions;
 
-  // console.log(node.internal.type);
-  // if (node.internal.type === 'ImagesYaml') {
-  //   // console.log(JSON.stringify(node, null, 2));
-  //   const parent = getNode(node.parent!);
-  //   console.log('>>>: ' + JSON.stringify(parent, null, 2));
-  // }
   if (node.internal.type === 'ImageSharp') {
     const parent = getNode(node.parent!)!;
     createNodeField({node, name: 'relativePath', value: parent.relativePath});
@@ -104,19 +77,14 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
     createNodeField({node, name: 'month', value: month});
     createNodeField({node, name: 'year-month', value: year_month});
     createNodeField({node, name: 'day', value: day});
-
-    // console.log(JSON.stringify((node.frontmatter as any).galleries));
   }
-  //  else if (node.internal.type === 'ImageSharp') {
-  //   createNodeField({node, name: 'relativePath', value: 'foobar'});
-  //   // const parent = getNode(node.parent);
-  //   // console.log(JSON.stringify(parent, null, 2));
-  //   // console.log(JSON.stringify(node, null, 2));
-  //   // console.log('=========================================');
-  //   // throw 0;
-  // }
 };
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// createPages()
+//
+///////////////////////////////////////////////////////////////////////////////
 export const createPages: GatsbyNode['createPages'] = async ({
   actions,
   graphql,
@@ -150,13 +118,13 @@ export const createPages: GatsbyNode['createPages'] = async ({
           caption
           title
           image {
-            fluid {
-              originalName
-            }
             original {
               src
             }
             gatsbyImageData
+            fields {
+              relativePath
+            }
           }
         }
       }
@@ -172,14 +140,15 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   const images: {[key: string]: ImageDescriptor} = {};
   for (const x of data.allImagesYaml.nodes) {
-    // console.log(JSON.stringify(x, null, 2));
     if (!x.image) {
+      // Resolver in createSchemaCustomization() didn't manage to
+      // find the ImageSharp for this YAML image.
       // TODO: better error handling here.
       // Print warning.
-      // Substitue error image.
       continue;
     }
-    const name = x.image!.fluid!.originalName!;
+
+    const name = x.image!.fields!.relativePath!;
     // TODO: error check for missing image, title, caption, etc.
     // TODO: error check for duplicate image names.
     if (images[name]) {
@@ -191,20 +160,23 @@ export const createPages: GatsbyNode['createPages'] = async ({
         caption: x.caption,
         altText: x.alt,
         gatsbyImageData: x.image!.gatsbyImageData,
+
+        // src field is used by the React Lightbox
         src: x.image!.original!.src!,
       };
     }
   }
+  console.log(JSON.stringify(images, null, 2));
 
   console.log(
     '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
   );
-  // console.log('data: ' + JSON.stringify(data));
-  // console.log(createPage);
 
+  //
+  // Generate tag pages
+  //
   const tagTemplate = path.resolve('./src/templates/tag-template.tsx');
   data.tagsGroup.group.forEach(tag => {
-    // console.log(tag);
     createPage({
       path: `/tags/${_.kebabCase(tag!.fieldValue!)}/`,
       component: tagTemplate,
@@ -214,6 +186,9 @@ export const createPages: GatsbyNode['createPages'] = async ({
     });
   });
 
+  //
+  // Generate blog archive page for each month
+  //
   const archiveTemplate = path.resolve('./src/templates/archive-template.tsx');
   data.archiveGroup.group.forEach(archive => {
     createPage({
@@ -225,9 +200,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
     });
   });
 
+  //
+  // Generate pages from markdown files.
+  //
   const blogPostTemplate = path.resolve('./src/templates/blog-post.tsx');
   data.allMdx.edges.forEach(edge => {
-    // console.log('SLUG: ' + edge.node.slug);
     createPage({
       path: edge.node.slug!,
       component: blogPostTemplate,
@@ -242,7 +219,3 @@ export const createPages: GatsbyNode['createPages'] = async ({
     '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
   );
 };
-
-// function escapeRegex(s: string) {
-//   return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-// }

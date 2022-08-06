@@ -10,15 +10,15 @@ import OtherPage from '../components/otherpage';
 
 const BlogPost = ({data, pageContext}: PageProps<Queries.BlogPostQuery>) => {
   const galleries = data.mdx?.frontmatter?.galleries;
+  const slug = data.mdx?.slug;
+  const context = {...pageContext, galleries, slug};
   const shortcodes = {Gallery, Image};
 
   if (data.mdx?.frontmatter?.type !== null) {
     return (
       <OtherPage>
         <MDXProvider components={shortcodes}>
-          <MDXRenderer pageContext={{...pageContext, galleries}}>
-            {data.mdx!.body}
-          </MDXRenderer>
+          <MDXRenderer pageContext={context}>{data.mdx!.body}</MDXRenderer>
         </MDXProvider>
       </OtherPage>
     );
@@ -30,9 +30,7 @@ const BlogPost = ({data, pageContext}: PageProps<Queries.BlogPostQuery>) => {
           Posted on {data.mdx?.frontmatter?.date}
         </div>
         <MDXProvider components={shortcodes}>
-          <MDXRenderer pageContext={{...pageContext, galleries}}>
-            {data.mdx!.body}
-          </MDXRenderer>
+          <MDXRenderer pageContext={context}>{data.mdx!.body}</MDXRenderer>
         </MDXProvider>
       </BlogPage>
     );
@@ -51,6 +49,7 @@ export const query = graphql`
         }
       }
       body
+      slug
     }
   }
 `;

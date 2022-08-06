@@ -2,11 +2,12 @@ https://byderek.com/post/a-stackoverflow-question--a-use-case-for-gatsbys-field-
 https://www.gatsbyjs.com/plugins/gatsby-schema-field-absolute-path/
 
 ## Next
-* warn [gatsby-transformer-sharp] The "fixed" and "fluid" resolvers are now deprecated.
+* x Get rid of fluid dependency
+* x warn [gatsby-transformer-sharp] The "fixed" and "fluid" resolvers are now deprecated.
 * Build archive based on dates extractred from slugs
 * Complete image.yaml files
-* Cleanup createSchemaCustomization() in gatsby-node.ts
-* Cleanup console spew in gatsby-node.ts
+* x Cleanup createSchemaCustomization() in gatsby-node.ts
+* x Cleanup console spew in gatsby-node.ts
 * Environment variable for content folders
 * Image
   * x Rename image to gatsbyImageData

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 
@@ -9,7 +9,10 @@ const images = [
   '//placekitten.com/1500/1500',
 ];
 
-export default class LightboxExample extends React.Component<{}, {photoIndex: number, isOpen:boolean}> {
+export default class LightboxExample extends React.Component<
+  {},
+  {photoIndex: number; isOpen: boolean}
+> {
   constructor(props: {}) {
     super(props);
 
@@ -20,11 +23,11 @@ export default class LightboxExample extends React.Component<{}, {photoIndex: nu
   }
 
   render() {
-    const { photoIndex, isOpen } = this.state;
+    const {photoIndex, isOpen} = this.state;
 
     return (
       <div>
-        <button type="button" onClick={() => this.setState({ isOpen: true })}>
+        <button type="button" onClick={() => this.setState({isOpen: true})}>
           Open Lightbox
         </button>
 
@@ -33,7 +36,7 @@ export default class LightboxExample extends React.Component<{}, {photoIndex: nu
             mainSrc={images[photoIndex]}
             nextSrc={images[(photoIndex + 1) % images.length]}
             prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-            onCloseRequest={() => this.setState({ isOpen: false })}
+            onCloseRequest={() => this.setState({isOpen: false})}
             onMovePrevRequest={() =>
               this.setState({
                 photoIndex: (photoIndex + images.length - 1) % images.length,

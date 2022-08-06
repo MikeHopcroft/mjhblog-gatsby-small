@@ -2,6 +2,7 @@ import {GatsbyImage} from 'gatsby-plugin-image';
 import React from 'react';
 
 import {ImageDescriptor} from '../interfaces';
+import {resolveImage} from '../utilities/resolve-image';
 
 import {
   caption,
@@ -14,6 +15,7 @@ interface Props {
   props: {
     pageContext: {
       images: {[key: string]: ImageDescriptor};
+      slug: string;
     };
   };
   image: string;
@@ -25,7 +27,8 @@ class Image extends React.Component<Props> {
   }
 
   render() {
-    const image = this.props.props.pageContext.images[this.props.image];
+    const image = resolveImage(this.props, this.props.image);
+
     return (
       <div className={container}>
         <a href={image.src}>

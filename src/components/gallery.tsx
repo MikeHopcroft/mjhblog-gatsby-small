@@ -3,6 +3,7 @@ import React from 'react';
 import Lightbox from 'react-image-lightbox';
 
 import {ImageDescriptor} from '../interfaces';
+import {resolveImage} from '../utilities/resolve-image';
 
 import {
   container,
@@ -20,6 +21,7 @@ interface Props {
     pageContext: {
       images: {[key: string]: ImageDescriptor};
       galleries: GalleryDescriptor[];
+      slug: string;
     };
   };
   id: number;
@@ -31,7 +33,7 @@ interface State {
 }
 
 class Gallery extends React.Component<Props, State> {
-  images2: ImageDescriptor[];
+  images: ImageDescriptor[];
 
   readonly sizes = [
     [1, 1],
@@ -53,9 +55,8 @@ class Gallery extends React.Component<Props, State> {
       photoIndex: 0,
     };
 
-    const allImages = props.props.pageContext.images;
     const gallery = props.props.pageContext.galleries[props.id]!;
-    this.images2 = gallery.map(x => allImages[x.image]);
+    this.images = gallery.map(x => resolveImage(props, x.image));
 
     this.getImage = this.getImage.bind(this);
   }
@@ -66,13 +67,13 @@ class Gallery extends React.Component<Props, State> {
 
   render() {
     const {isOpen, photoIndex} = this.state;
-    const images = this.images2;
+    const images = this.images;
 
     return (
       <div>
         <div className={wrapper}>
           <div className={container}>
-            {this.images2.map((x, i) => this.getImage(x, i))}
+            {images.map((x, i) => this.getImage(x, i))}
           </div>
         </div>
 

@@ -1,0 +1,4 @@
+- image: image-not-found.png
+  title: Image not found
+  caption: This image was not found. Check the name in images.yaml.
+  alt: Image not found.
