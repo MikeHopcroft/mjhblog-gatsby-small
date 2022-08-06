@@ -1,16 +1,13 @@
-import { graphql, PageProps } from "gatsby";
-import React from "react";
+import {graphql, PageProps} from 'gatsby';
+import React from 'react';
 
-import BlogPostList from "../components/blogpostlist";
-import BlogPage from "../components/blogpage";
+import BlogPostList from '../components/blogpostlist';
+import BlogPage from '../components/blogpage';
 
-function ArchiveTemplate({
-  data,
-  pageContext,
-}: PageProps<Queries.TagPageQuery>) {
+function ArchiveTemplate({data, pageContext}: PageProps<Queries.TagPageQuery>) {
   // TODO: removed duplicate code in archive.tsx
   const x = new Date((pageContext as any).archive);
-  const month = x.toLocaleString("default", { timeZone: "utc", month: "long" });
+  const month = x.toLocaleString('default', {timeZone: 'utc', month: 'long'});
   const anchorText = `${month} ${x.getFullYear()}`;
 
   return (
@@ -25,10 +22,10 @@ export const query = graphql`
   query ArchivePage($archive: Date) {
     allMdx(
       filter: {
-        frontmatter: { type: { eq: null } }
-        fields: { year_month: { eq: $archive } }
+        frontmatter: {type: {eq: null}}
+        fields: {year_month: {eq: $archive}}
       }
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: {fields: frontmatter___date, order: DESC}
     ) {
       nodes {
         ...BlogPostInfoFragment

@@ -1,16 +1,23 @@
+https://byderek.com/post/a-stackoverflow-question--a-use-case-for-gatsbys-field-extension
+https://www.gatsbyjs.com/plugins/gatsby-schema-field-absolute-path/
+
 ## Next
+* warn [gatsby-transformer-sharp] The "fixed" and "fluid" resolvers are now deprecated.
+* Build archive based on dates extractred from slugs
 * Complete image.yaml files
 * Cleanup createSchemaCustomization() in gatsby-node.ts
+* Cleanup console spew in gatsby-node.ts
+* Environment variable for content folders
 * Image
   * x Rename image to gatsbyImageData
   * x Hyperlink to full image
   * x Border with hover styling
   * x Caption area
-  * Duplicated ImageDescriptor
+  * x Duplicated ImageDescriptor
   * Red X for error (with diagnostic message)
     * Error component
   * Look into using Gatsby reporter for errors
-  * Check for duplicate image entries
+  * x Check for duplicate image entries
   * Check for ImageSharps with same fluid.originalName
   * Check for dangling image entries
   * Log errors to special error page
