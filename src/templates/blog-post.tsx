@@ -45,7 +45,9 @@ export const query = graphql`
         title
         date(formatString: "MMMM D, YYYY")
         galleries {
-          image
+          image {
+            id
+          }
         }
       }
       body

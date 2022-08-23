@@ -79,6 +79,14 @@ const config: GatsbyConfig = {
       },
       __key: 'pages',
     },
+    // {
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     name: 'posts',
+    //     path: 'd:\\git\\mjhblog\\import-test',
+    //   },
+    //   __key: 'posts',
+    // },
   ],
 };
 

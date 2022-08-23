@@ -13,6 +13,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
   ({actions, schema}) => {
     const {createTypes} = actions;
     const typeDefs = [
+      // `type MdxFrontmatter @infer {
+      //   hero_image: String
+      //   featured: Boolean
+      // }`,
+      // `type MdxFrontmatter @infer {
+      //   featured: Boolean
+      // }`,
       `type ImagesYaml implements Node {
         image: ImageSharp
       }`,
