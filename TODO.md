@@ -4,7 +4,7 @@ https://www.gatsbyjs.com/plugins/gatsby-schema-field-absolute-path/
 ## Next
 * x Get rid of fluid dependency
 * x warn [gatsby-transformer-sharp] The "fixed" and "fluid" resolvers are now deprecated.
-* Build archive based on dates extractred from slugs
+* Build archive based on dates extracted from slugs
 * Complete image.yaml files
 * x Cleanup createSchemaCustomization() in gatsby-node.ts
 * x Cleanup console spew in gatsby-node.ts
@@ -15,8 +15,8 @@ https://www.gatsbyjs.com/plugins/gatsby-schema-field-absolute-path/
   * x Border with hover styling
   * x Caption area
   * x Duplicated ImageDescriptor
-  * Red X for error (with diagnostic message)
-    * Error component
+  * x Red X for error (with diagnostic message)
+    * x Error component
   * Look into using Gatsby reporter for errors
   * x Check for duplicate image entries
   * Check for ImageSharps with same fluid.originalName
@@ -28,7 +28,8 @@ https://www.gatsbyjs.com/plugins/gatsby-schema-field-absolute-path/
   * Consider image landing pages with captions.
   * BUG: scroll position not restored correctly after navigating to image and back.
 * Gallery
-  * Determine which image size is actually loaded
+  * BUG: gallery with single image at bottom of post has wrong aspect ratio
+  * x Determine which image size is actually loaded
   * Lightbox thumbnails while full-size images are loading
   * . Try out long titles in galleries
   * x Add title and caption to lightbox
